@@ -1,11 +1,16 @@
-// Placeholder badge above a region label: coloured circle with the region's initial.
-// Swap the inner span for an <img> later when photos are ready.
-export default function Badge({ u, active }) {
-  const size = active ? 48 : 34;
+const serif = { fontFamily: "'Fraunces', Georgia, 'Times New Roman', serif" };
+
+/** Round county marker with its initial. White with a dark ring normally; solid dark with a red ring when in focus. */
+export default function Badge({ u, active = false }) {
   return (
     <span
-      className="mb-1 flex items-center justify-center rounded-full border-2 border-white text-sm font-semibold not-italic shadow-lg transition-all duration-300"
-      style={{ width: size, height: size, background: u.color }}
+      aria-hidden="true"
+      style={serif}
+      className={`flex h-7 w-7 items-center justify-center rounded-full border-2 text-[12px] font-bold shadow-[0_2px_8px_rgba(0,0,0,.25)] transition-colors ${
+        active
+          ? "border-[#D93A2B] bg-[#141414] text-white"
+          : "border-[#141414] bg-white text-[#141414]"
+      }`}
     >
       {u.name[0]}
     </span>

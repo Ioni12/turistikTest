@@ -143,7 +143,7 @@ export function TourCard({
     <a
       href={`/tour/${t.slug}`}
       style={{ transitionDelay: `${i * 90}ms` }}
-      className={`group flex w-[78%] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_14px_34px_-18px_rgba(22,33,15,.45)] transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_22px_44px_-18px_rgba(22,33,15,.55)] motion-reduce:transition-none sm:w-auto dark:border-white/10 dark:bg-[#12292f] ${seen ? "opacity-100" : "translate-y-4 opacity-0"}`}
+      className={`group flex w-[78%] flex-none snap-center flex-col overflow-hidden rounded-3xl border border-black/10 bg-white text-[#141414] shadow-[0_14px_34px_-18px_rgba(22,33,15,.45)] transition-all duration-700 hover:-translate-y-1 hover:shadow-[0_22px_44px_-18px_rgba(22,33,15,.55)] motion-reduce:transition-none sm:w-auto dark:border-white/10 dark:bg-[#12292f] dark:text-[#e8f0e0] ${seen ? "opacity-100" : "translate-y-4 opacity-0"}`}
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-[linear-gradient(135deg,#EFEBE2,#DCD5C4)]">
         {!bad && (
@@ -177,7 +177,7 @@ export function TourCard({
               {[1, 2, 3].map((n) => (
                 <i
                   key={n}
-                  className={`h-1.5 w-3.5 rounded-full ${n <= (LEVEL[t.level] || 1) ? "bg-[#D93A2B] dark:bg-[#D93A2B]" : "bg-black/15 dark:bg-white/20"}`}
+                  className={`h-1.5 w-3.5 rounded-full ${n <= (LEVEL[t.level] || 1) ? "bg-[#D93A2B]" : "bg-black/15 dark:bg-white/20"}`}
                 />
               ))}
             </span>
@@ -205,7 +205,7 @@ export function TourCard({
             </b>
             <span className="ml-1 text-xs opacity-55">per person</span>
           </div>
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#141414] text-white transition group-hover:bg-[#141414] group-hover:text-white dark:bg-[#141414] dark:text-[#141414]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#141414] text-white transition group-hover:bg-[#D93A2B] dark:bg-white dark:text-[#141414] dark:group-hover:bg-[#D93A2B] dark:group-hover:text-white">
             <Arrow />
           </span>
         </div>
@@ -268,7 +268,7 @@ export default function FeaturedTours({
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-[#D93A2B] dark:text-[#D93A2B]">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[.25em] text-[#D93A2B]">
               Featured tours
             </p>
             <h2
@@ -306,7 +306,7 @@ export default function FeaturedTours({
                     type="button"
                     aria-pressed={val === id}
                     onClick={() => set(id)}
-                    className={`rounded-full border px-4 py-1.5 text-sm transition ${val === id ? "border-transparent bg-[#141414] text-white dark:bg-[#141414] dark:text-white" : "border-black/15 hover:border-black/40 dark:border-white/20"}`}
+                    className={`rounded-full border px-4 py-1.5 text-sm transition ${val === id ? "border-transparent bg-[#141414] text-white" : "border-black/15 hover:border-black/40 dark:border-white/20"}`}
                   >
                     {text}
                   </button>

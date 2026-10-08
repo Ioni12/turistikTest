@@ -174,7 +174,7 @@ export default function ContactPage({ business = false }) {
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className={label}>
                   Phone or WhatsApp{" "}
-                  <span className="font-normal opacity-55">(optional)</span>
+                  <span className="font-normal opacity-70">(optional)</span>
                   <input
                     type="tel"
                     value={f.phone}
@@ -228,7 +228,7 @@ export default function ContactPage({ business = false }) {
                   <fieldset>
                     <legend className={label}>
                       Places you would like to see{" "}
-                      <span className="font-normal opacity-55">(optional)</span>
+                      <span className="font-normal opacity-70">(optional)</span>
                     </legend>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {UNITS.map((u) => (
@@ -241,7 +241,7 @@ export default function ContactPage({ business = false }) {
                         >
                           <i
                             className="h-2 w-2 rounded-full"
-                            style={{ background: u.color }}
+                            style={{ background: u.tone }}
                           />
                           {u.name}
                         </button>

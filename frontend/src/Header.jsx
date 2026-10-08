@@ -74,7 +74,7 @@ const SEARCH = [
     title: u.name,
     sub: INFO[u.id]?.tag || "",
     href: `/destinations/${u.id}`,
-    color: u.color,
+    color: u.tone,
   })),
   ...TOURS.map((t) => ({
     kind: "Tour",
@@ -273,7 +273,7 @@ export default function Header({
         >
           {/* the floating bar */}
           <div
-            className={`flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2 shadow-[0_8px_30px_-12px_rgba(0,0,0,.45)] backdrop-blur-xl transition-colors duration-300 ${glass}`}
+            className={`flex h-14 items-center justify-between gap-3 rounded-full border pl-5 pr-2 shadow-[0_8px_30px_-12px_rgba(0,0,0,.45)] transition-colors duration-300 ${glass}`}
           >
             <a
               href="/"
@@ -408,11 +408,11 @@ export default function Header({
           {/* mega menus */}
           {menu && (
             <div className="absolute inset-x-0 top-full hidden pt-2 lg:block">
-              <div className="grid gap-6 rounded-[28px] border border-black/10 bg-white/95 p-6 text-[#141414] shadow-2xl backdrop-blur-xl md:grid-cols-[1fr_280px]">
+              <div className="grid gap-6 rounded-[28px] border border-black/10 bg-white/95 p-6 text-[#141414] shadow-2xl md:grid-cols-[1fr_280px]">
                 {menu === "destinations" ? (
                   <>
                     <div>
-                      <div className="mb-3 text-[11px] font-semibold uppercase tracking-[.2em] opacity-50">
+                      <div className="mb-3 text-[11px] font-semibold uppercase tracking-[.2em] opacity-70">
                         Explore by county
                       </div>
                       <ul className="grid grid-cols-3 gap-x-4 gap-y-1">
@@ -424,13 +424,13 @@ export default function Header({
                             >
                               <i
                                 className="mt-1.5 h-2.5 w-2.5 flex-none rounded-full"
-                                style={{ background: u.color }}
+                                style={{ background: u.tone }}
                               />
                               <span>
                                 <b className="block text-sm font-semibold">
                                   {u.name}
                                 </b>
-                                <span className="line-clamp-1 text-xs opacity-60">
+                                <span className="line-clamp-1 text-xs opacity-70">
                                   {INFO[u.id]?.tag}
                                 </span>
                               </span>
@@ -471,7 +471,7 @@ export default function Header({
                 ) : (
                   <>
                     <div>
-                      <div className="mb-3 text-[11px] font-semibold uppercase tracking-[.2em] opacity-50">
+                      <div className="mb-3 text-[11px] font-semibold uppercase tracking-[.2em] opacity-70">
                         Featured tours
                       </div>
                       <ul className="grid grid-cols-2 gap-2">
@@ -488,12 +488,12 @@ export default function Header({
                                 >
                                   {t.title}
                                 </b>
-                                <span className="text-xs opacity-60">
+                                <span className="text-xs opacity-70">
                                   {t.sub}
                                 </span>
                               </span>
                               <span className="mt-3 flex items-center justify-between text-xs">
-                                <span className="opacity-60">
+                                <span className="opacity-70">
                                   {t.days} days
                                 </span>
                                 <b className="text-[#D93A2B]">
@@ -506,7 +506,7 @@ export default function Header({
                       </ul>
                     </div>
                     <div className="flex flex-col rounded-2xl bg-[#141414] p-5 text-white">
-                      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[.2em] opacity-60">
+                      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[.2em] opacity-70">
                         Browse by style
                       </div>
                       <ul className="flex-1">
@@ -583,7 +583,7 @@ export default function Header({
                       >
                         <i
                           className="h-2 w-2 rounded-full"
-                          style={{ background: u.color }}
+                          style={{ background: u.tone }}
                         />
                         {u.name}
                       </a>
@@ -634,7 +634,7 @@ export default function Header({
       {/* search overlay */}
       {searchOpen && (
         <div
-          className="fixed inset-0 z-[60] flex items-start justify-center bg-black/60 px-4 pt-[14vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-start justify-center bg-black/60 px-4 pt-[14vh]"
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) setSearchOpen(false);
           }}
@@ -646,7 +646,7 @@ export default function Header({
             className="w-full max-w-xl overflow-hidden rounded-3xl bg-white text-[#141414] shadow-2xl"
           >
             <div className="flex items-center gap-3 border-b border-black/10 px-5">
-              <Icon.search className="opacity-50" />
+              <Icon.search className="opacity-70" />
               <input
                 ref={inputRef}
                 value={q}
@@ -669,13 +669,13 @@ export default function Header({
                 placeholder="Search tours and destinations"
                 className="h-14 flex-1 bg-transparent text-base outline-none placeholder:text-black/40"
               />
-              <kbd className="hidden rounded-md border border-black/15 px-1.5 py-0.5 text-[11px] opacity-60 sm:block">
+              <kbd className="hidden rounded-md border border-black/15 px-1.5 py-0.5 text-[11px] opacity-70 sm:block">
                 Esc
               </kbd>
             </div>
             <ul data-lenis-prevent className="max-h-[50vh] overflow-y-auto p-2">
               {results.length === 0 && (
-                <li className="px-4 py-6 text-center text-sm opacity-60">
+                <li className="px-4 py-6 text-center text-sm opacity-70">
                   Nothing found. Try a place like Berat or Theth.
                 </li>
               )}
@@ -692,11 +692,11 @@ export default function Header({
                     />
                     <span className="flex-1">
                       <b className="block text-sm font-semibold">{r.title}</b>
-                      <span className="line-clamp-1 text-xs opacity-60">
+                      <span className="line-clamp-1 text-xs opacity-70">
                         {r.sub}
                       </span>
                     </span>
-                    <span className="text-[11px] uppercase tracking-wider opacity-50">
+                    <span className="text-[11px] uppercase tracking-wider opacity-70">
                       {r.kind}
                     </span>
                   </a>

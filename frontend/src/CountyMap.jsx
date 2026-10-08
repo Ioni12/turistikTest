@@ -38,7 +38,7 @@ export default function CountyMap({
                 .join("L") +
               "Z"
             }
-            fill={highlight === u.id || hot ? "#D93A2B" : u.color}
+            fill={highlight === u.id || hot ? "#D93A2B" : u.tone}
             fillOpacity={hot ? 1 : on ? 1 : 0.5}
             stroke="#fff"
             strokeWidth="1.6"

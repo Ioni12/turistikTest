@@ -45,7 +45,7 @@ const PLACE_UNIT = PLACES.map((p) =>
 );
 
 const cardCls =
-  "relative h-full flex-none snap-center overflow-auto rounded-[22px] border border-white/70 bg-white/80 p-5 shadow-[0_18px_40px_-12px_rgba(22,33,15,.35)] dark:border-white/10 dark:bg-[#0f2328]/85";
+  "relative h-full flex-none snap-center overflow-auto rounded-[22px] border border-black/15 bg-white p-5 shadow-[0_18px_40px_-12px_rgba(22,33,15,.35)] ";
 const GAP = 12;
 // Load Fraunces (Google Fonts / next/font) for the headline look; Georgia is the fallback.
 const FONT = "'Fraunces', Georgia, 'Times New Roman', serif";
@@ -54,12 +54,19 @@ const serif = { fontFamily: FONT };
 // Full-screen background per region. Put your own at public/albania/bg/<unit-id>.jpg
 // (e.g. bg/berat.jpg, bg/tirane.jpg) and bg/albania.jpg for the intro and outro.
 // Missing files fall back to a random photo seeded by the id, then to the gradient.
-const bgStyle = (id) => ({
-  backgroundImage: `url(/albania/bg/${id}.jpg), linear-gradient(#FAF8F4, #F3F0E9)`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-});
-const bgId = (m) => (m >= 1 && m <= N ? UNITS[m - 1].id : "albania");
+const bgStyle = (m) => {
+  const u = m >= 1 && m <= N ? UNITS[m - 1] : null;
+  const id = u ? u.id : "albania";
+  // before a photo exists (or while it loads) each county has its own tinted backdrop
+  const base = u
+    ? `linear-gradient(160deg, ${u.tone} 0%, #F6F1E8 100%)`
+    : "linear-gradient(160deg, #EADFCB 0%, #F8F4EC 100%)";
+  return {
+    backgroundImage: `url(/albania/bg/${id}.jpg), ${base}`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+};
 
 export default function AlbaniaScrollMap() {
   const rootRef = useRef(null);
@@ -235,7 +242,7 @@ export default function AlbaniaScrollMap() {
     catcher.position.y = -0.01;
     catcher.receiveShadow = true;
     scene.add(catcher);
-    const MUTED = new THREE.Color("#EFEBE2");
+    const MUTED = new THREE.Color("#DCD3BF"); // upcoming counties: soft sand, visited ones stay bright white
     const ACCENT = new THREE.Color("#D93A2B"); // the county in focus turns red
 
     const units = UNITS.map((u, i) => {
@@ -256,7 +263,7 @@ export default function AlbaniaScrollMap() {
       mesh.add(
         new THREE.LineSegments(
           new THREE.EdgesGeometry(g, 30),
-          new THREE.LineBasicMaterial({ color: 0xffffff }),
+          new THREE.LineBasicMaterial({ color: 0x5b5547 }),
         ),
       );
       scene.add(mesh);
@@ -493,18 +500,14 @@ export default function AlbaniaScrollMap() {
     info.cards.forEach((c) => slides.push({ k: "info", t: c[0], d: c[1] }));
     slides.push({ k: "tours" });
   }
-  const label = "text-xs tracking-widest opacity-60";
+  const label = "text-xs tracking-widest opacity-70";
   const h2 =
     "mb-2 text-[30px] font-semibold leading-[1.05] tracking-tight md:text-[34px]";
   const arrow =
-    "h-7 w-7 rounded-full bg-[#141414] text-xs text-white disabled:opacity-25 dark:bg-[#D93A2B] dark:text-[#141414]";
+    "h-7 w-7 rounded-full bg-[#141414] text-xs text-white disabled:opacity-25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D93A2B]";
 
   return (
-    <div
-      id="map"
-      ref={rootRef}
-      className="relative text-[#141414] dark:text-[#e8f0e0]"
-    >
+    <div id="map" ref={rootRef} className="relative text-[#141414] ">
       {/* everything below is pinned to the screen while the map section scrolls past */}
       <div className="sticky top-0 isolate h-screen overflow-hidden">
         {/* background: the selected region's image, crossfading as it changes */}
@@ -513,11 +516,11 @@ export default function AlbaniaScrollMap() {
             <div
               key={m}
               className={`absolute inset-0 transition-opacity duration-700 ${m === step ? "opacity-100" : "opacity-0"}`}
-              style={bgStyle(bgId(m))}
+              style={bgStyle(m)}
             />
           ))}
-          <div className="absolute inset-0 bg-[#FAF8F4]/80" />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_45%,transparent_40%,rgba(0,0,0,.06)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(250,248,244,.72)_0%,rgba(250,248,244,.28)_45%,transparent_75%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_60%_45%,transparent_40%,rgba(0,0,0,.14)_100%)]" />
         </div>
 
         {glFailed && (
@@ -542,15 +545,15 @@ export default function AlbaniaScrollMap() {
                 key={u.id}
                 ref={(el) => (chipRefs.current[i] = el)}
                 onClick={() => goTo(i + 1)}
-                className={`flex-none rounded-full border px-[11px] py-1 text-xs ${
+                className={`flex-none rounded-full border px-[11px] py-1 text-xs font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D93A2B] ${
                   i === sel
                     ? "border-transparent bg-[#141414] text-white"
-                    : "border-black/15 bg-white/70 text-white"
+                    : "border-black/30 bg-white text-[#141414] hover:border-[#141414]"
                 }`}
               >
                 <i
-                  className="mr-1.5 inline-block h-2 w-2 rounded-full"
-                  style={{ background: u.color }}
+                  className="mr-1.5 inline-block h-2 w-2 rounded-full border border-black/40"
+                  style={{ background: u.tone }}
                 />
                 {u.name}
               </button>
@@ -565,16 +568,15 @@ export default function AlbaniaScrollMap() {
             <div
               key={u.id}
               ref={(el) => (labelRefs.current[i] = el)}
-              style={{
-                ...serif,
-                textShadow: "0 0 6px rgba(255,255,255,.95), 0 0 2px #fff",
-              }}
-              className={`pointer-events-none absolute left-0 top-0 flex-col items-center whitespace-nowrap text-[13px] font-medium italic text-[#141414] transition-opacity duration-300 ${
-                i === sel ? "opacity-100" : "opacity-[.65]"
-              }`}
+              className="pointer-events-none absolute left-0 top-0 flex-col items-center gap-1 whitespace-nowrap"
             >
               <Badge u={u} active={i === sel} />
-              {u.name}
+              <span
+                style={serif}
+                className={`rounded-full px-2.5 py-0.5 text-[13px] font-semibold italic shadow-[0_2px_8px_rgba(0,0,0,.2)] ${i === sel ? "bg-[#141414] text-white" : "bg-white text-[#141414]"}`}
+              >
+                {u.name}
+              </span>
             </div>
           ))}
           {PLACES.map((p, k) => (
@@ -583,7 +585,7 @@ export default function AlbaniaScrollMap() {
               ref={(el) => (pinRefs.current[k] = el)}
               className="pointer-events-none absolute left-0 top-0 flex flex-col items-center gap-0.5 whitespace-nowrap text-xs font-semibold"
             >
-              <b className="rounded-full bg-[#141414] px-2.5 py-0.5 font-semibold text-white shadow-lg dark:bg-white dark:text-[#141414]">
+              <b className="rounded-full bg-[#141414] px-2.5 py-0.5 font-semibold text-white shadow-lg ">
                 {p.n}
               </b>
               <i className="relative mt-0.5 h-3 w-3 rounded-full border-2 border-white bg-[#D93A2B]">
@@ -611,7 +613,7 @@ export default function AlbaniaScrollMap() {
                 style={
                   unit
                     ? {
-                        backgroundImage: `linear-gradient(160deg, ${unit.color}66, transparent 50%)`,
+                        backgroundImage: `linear-gradient(160deg, ${unit.tone}66, transparent 50%)`,
                       }
                     : undefined
                 }
@@ -619,7 +621,7 @@ export default function AlbaniaScrollMap() {
               >
                 <div
                   className="mb-3.5 h-1.5 w-14 rounded-full"
-                  style={{ background: unit ? unit.color : "#D93A2B" }}
+                  style={{ background: unit ? unit.tone : "#D93A2B" }}
                 />
                 {sl.k === "intro" && (
                   <>
@@ -631,7 +633,7 @@ export default function AlbaniaScrollMap() {
                       From the Alps in the north to the Ionian coast in the
                       south. Scroll to explore.
                     </p>
-                    <span className="absolute bottom-4 left-5 text-xs opacity-60">
+                    <span className="absolute bottom-4 left-5 text-xs opacity-70">
                       Scroll ↓
                     </span>
                   </>
@@ -657,7 +659,7 @@ export default function AlbaniaScrollMap() {
                     <div className="text-[12.5px] opacity-70">
                       Best for: {info.best}
                     </div>
-                    <span className="absolute bottom-4 left-5 text-xs opacity-60">
+                    <span className="absolute bottom-4 left-5 text-xs opacity-70">
                       Swipe for highlights →
                     </span>
                   </>
@@ -684,10 +686,10 @@ export default function AlbaniaScrollMap() {
                         {tours.map((t) => (
                           <li
                             key={t[0]}
-                            className="mt-1.5 flex justify-between gap-2.5 rounded-xl bg-black/5 px-3 py-2 text-[13.5px] dark:bg-white/10"
+                            className="mt-1.5 flex justify-between gap-2.5 rounded-xl bg-black/5 px-3 py-2 text-[13.5px] "
                           >
                             <span>{t[0]}</span>
-                            <em className="whitespace-nowrap font-semibold not-italic text-[#D93A2B] dark:text-[#D93A2B]">
+                            <em className="whitespace-nowrap font-semibold not-italic text-[#D93A2B] ">
                               from {t[1]}
                             </em>
                           </li>
@@ -730,7 +732,7 @@ export default function AlbaniaScrollMap() {
                 {slides.map((_, n) => (
                   <span
                     key={n}
-                    className={`h-1.5 rounded-full transition-all ${n === cardIdx ? "w-4 bg-[#D93A2B] dark:bg-[#D93A2B]" : "w-1.5 bg-black/20 dark:bg-white/30"}`}
+                    className={`h-1.5 rounded-full transition-all ${n === cardIdx ? "w-4 bg-[#D93A2B] " : "w-1.5 bg-black/20 "}`}
                   />
                 ))}
               </div>

@@ -4,17 +4,24 @@ import { useEffect, useRef, useState } from "react";
 // Load Fraunces (Google Fonts / next/font) for the headline; Georgia is the fallback.
 const serif = { fontFamily: "'Fraunces', Georgia, 'Times New Roman', serif" };
 
-// A few of the monument stickers again (same files as the hero: {cutoutBase}/{id}.png; a missing file shows a tower).
+// Same cutout files as the hero: {cutoutBase}/{id}.webp (a missing file shows a tower).
+// x = centre position (% of card width), h = height (% of card height). Keep x between ~58 and ~92 so nothing is clipped.
 const STICKERS = [
-  { id: "berat", label: "Berat Castle", color: "#78B89A", x: 66, h: 58 },
-  { id: "shkoder", label: "Rozafa Castle", color: "#B7DC84", x: 82, h: 78 },
   {
     id: "gjirokaster",
     label: "Gjirokastër Castle",
     color: "#E8C28F",
-    x: 96,
-    h: 64,
+    x: 62,
+    h: 52,
   },
+  {
+    id: "skanderbeg",
+    label: "Skanderbeg Square",
+    color: "#F0B58F",
+    x: 77,
+    h: 66,
+  },
+  { id: "tirane", label: "Tirana Clock Tower", color: "#8CC5D8", x: 91, h: 74 },
 ];
 const OUTLINE =
   "drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)";
@@ -130,7 +137,6 @@ export default function ClosingCTA({
               style={{
                 left: s.x + "%",
                 height: s.h + "%",
-                transform: undefined,
                 transitionDelay: `${400 + i * 150}ms`,
               }}
             >
@@ -139,7 +145,7 @@ export default function ClosingCTA({
                   <Tower color={s.color} label={s.label} />
                 ) : (
                   <img
-                    src={`${cutoutBase}/${s.id}.png`}
+                    src={`${cutoutBase}/${s.id}.webp`}
                     alt=""
                     className="h-full w-auto max-w-none"
                     style={{ filter: `grayscale(1) contrast(1.08) ${OUTLINE}` }}

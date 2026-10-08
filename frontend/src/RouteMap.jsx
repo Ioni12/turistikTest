@@ -72,7 +72,8 @@ export default function RouteMap({ route, activeDay = 0, className = "" }) {
               .join("L") +
             "Z"
           }
-          fill={visited.has(u.id) ? "#D3CAB5" : "#EFEBE2"}
+          fill={visited.has(u.id) ? u.tone : "#EFEBE2"}
+          fillOpacity={visited.has(u.id) ? 0.75 : 1}
           stroke="#fff"
           strokeWidth="1.4"
           strokeLinejoin="round"

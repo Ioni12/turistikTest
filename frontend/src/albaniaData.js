@@ -17,7 +17,8 @@ export const UNITS = [
     monument: { name: "Rozafa Castle", lon: 19.4935, lat: 42.0546 },
     name: "Shkodër",
     main: "Shkodër",
-    color: "#E4DDCD",
+    color: "#FFFFFF",
+    tone: "#7FA6B8",
     poly: [
       [19.346, 41.902],
       [19.862, 41.991],
@@ -35,7 +36,8 @@ export const UNITS = [
     monument: { name: "Valbona peaks", lon: 19.9, lat: 42.48 },
     name: "Kukës",
     main: "Kukës",
-    color: "#D9D0BD",
+    color: "#F3EEE4",
+    tone: "#8FB39A",
     poly: [
       [19.862, 41.991],
       [20.115, 41.886],
@@ -52,7 +54,8 @@ export const UNITS = [
     monument: { name: "Skanderbeg Memorial", lon: 19.6435, lat: 41.7837 },
     name: "Lezhë",
     main: "Lezhë",
-    color: "#EAE4D6",
+    color: "#FFFFFF",
+    tone: "#C9B27E",
     poly: [
       [19.761, 41.472],
       [19.949, 41.508],
@@ -69,7 +72,8 @@ export const UNITS = [
     monument: { name: "Mount Korab", lon: 20.55, lat: 41.79 },
     name: "Dibër",
     main: "Peshkopi",
-    color: "#D4CAB5",
+    color: "#EEE7DA",
+    tone: "#A89B86",
     poly: [
       [20.115, 41.886],
       [19.949, 41.508],
@@ -86,7 +90,8 @@ export const UNITS = [
     monument: { name: "Roman Amphitheatre", lon: 19.4457, lat: 41.3115 },
     name: "Durrës",
     main: "Durrës",
-    color: "#E1D9C7",
+    color: "#F8F4EC",
+    tone: "#7DB4C4",
     poly: [
       [19.563, 41.077],
       [19.761, 41.472],
@@ -102,7 +107,8 @@ export const UNITS = [
     monument: { name: "Tirana Clock Tower", lon: 19.8187, lat: 41.3275 },
     name: "Tiranë",
     main: "Tirana",
-    color: "#DDD4C0",
+    color: "#FFFFFF",
+    tone: "#D79C7A",
     poly: [
       [19.835, 40.974],
       [20.217, 41.278],
@@ -116,7 +122,8 @@ export const UNITS = [
     monument: { name: "Elbasan Castle", lon: 20.0822, lat: 41.1125 },
     name: "Elbasan",
     main: "Elbasan",
-    color: "#EBE5D8",
+    color: "#F1EBDF",
+    tone: "#B7A57F",
     poly: [
       [20.217, 41.278],
       [19.835, 40.974],
@@ -131,7 +138,8 @@ export const UNITS = [
     monument: { name: "Apollonia", lon: 19.4747, lat: 40.7186 },
     name: "Fier",
     main: "Fier",
-    color: "#D8CFBA",
+    color: "#FAF6EE",
+    tone: "#9DBA84",
     poly: [
       [19.638, 40.491],
       [19.876, 40.898],
@@ -149,7 +157,8 @@ export const UNITS = [
     monument: { name: "Berat Castle", lon: 19.9503, lat: 40.7058 },
     name: "Berat",
     main: "Berat",
-    color: "#E6E0D1",
+    color: "#EFE8DB",
+    tone: "#C98F6E",
     poly: [
       [20.1, 40.374],
       [20.393, 40.523],
@@ -163,7 +172,8 @@ export const UNITS = [
     monument: { name: "Resurrection Cathedral", lon: 20.7808, lat: 40.6186 },
     name: "Korçë",
     main: "Korçë",
-    color: "#D2C8B2",
+    color: "#FFFFFF",
+    tone: "#8FA9C7",
     poly: [
       [20.368, 40.738],
       [20.393, 40.523],
@@ -181,7 +191,8 @@ export const UNITS = [
     monument: { name: "Butrint", lon: 20.0214, lat: 39.7461 },
     name: "Vlorë",
     main: "Vlorë",
-    color: "#DFD6C3",
+    color: "#F5F0E6",
+    tone: "#5FB0C0",
     poly: [
       [20.1, 40.374],
       [19.638, 40.491],
@@ -199,7 +210,8 @@ export const UNITS = [
     monument: { name: "Gjirokastër Castle", lon: 20.1393, lat: 40.0758 },
     name: "Gjirokastër",
     main: "Gjirokastër",
-    color: "#EAE3D5",
+    color: "#EDE6D8",
+    tone: "#B89A7A",
     poly: [
       [20.393, 40.523],
       [20.1, 40.374],
