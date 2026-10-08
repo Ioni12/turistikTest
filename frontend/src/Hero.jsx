@@ -14,8 +14,8 @@ const STICKERS = [
     color: "#B7DC84",
     x: 68,
     h: 22,
-    xm: 24,
-    hm: 14,
+    xm: 22,
+    hm: 10,
     d: 0.3,
   },
   {
@@ -24,8 +24,8 @@ const STICKERS = [
     color: "#E8C28F",
     x: 76,
     h: 44,
-    xm: 48,
-    hm: 25,
+    xm: 46,
+    hm: 17,
     d: 0.5,
   },
   {
@@ -35,7 +35,7 @@ const STICKERS = [
     x: 87,
     h: 60,
     xm: 72,
-    hm: 33,
+    hm: 23,
     d: 0.9,
   },
   {
@@ -44,8 +44,8 @@ const STICKERS = [
     color: "#8CC5D8",
     x: 95,
     h: 68,
-    xm: 92,
-    hm: 38,
+    xm: 93,
+    hm: 27,
     d: 0.7,
   },
 ];
@@ -126,7 +126,7 @@ export default function Hero({
     const el = root.current;
     const onMove = (e) => {
       // mouse parallax: set CSS variables directly, no re-render
-      if (reduce) return;
+      if (reduce || e.pointerType === "touch") return;
       el.style.setProperty(
         "--mx",
         (e.clientX / window.innerWidth - 0.5) * -50 + "px",
@@ -221,7 +221,7 @@ export default function Hero({
             }}
           >
             <div
-              className={`h-full transition-all duration-[900ms] ease-out motion-reduce:transition-none ${on ? "translate-y-0 opacity-90" : "translate-y-[40%] opacity-0"}`}
+              className={`h-full transition-all duration-[900ms] ease-out motion-reduce:transition-none ${on ? "translate-y-0 opacity-50 md:opacity-90" : "translate-y-[40%] opacity-0"}`}
               style={{ ...rise(i), transformOrigin: "50% 100%" }}
             >
               <div
@@ -249,7 +249,7 @@ export default function Hero({
       </div>
 
       {/* copy */}
-      <div className="mx-auto w-full max-w-6xl px-5 pb-20 pt-28 md:px-8 md:pb-16 md:pt-28">
+      <div className="mx-auto w-full max-w-6xl px-5 pb-28 pt-24 sm:pt-28 md:px-8 md:pb-16">
         <div className="max-w-[780px]">
           <p
             style={after(100)}
@@ -259,7 +259,7 @@ export default function Hero({
           </p>
           <h1
             style={serif}
-            className="text-[44px] font-semibold leading-[1.02] tracking-tight sm:text-[clamp(44px,8vw,60px)] md:text-[clamp(44px,min(6.5vw,7.2vh),76px)]"
+            className="text-[clamp(32px,10.5vw,44px)] font-semibold leading-[1.02] tracking-tight sm:text-[clamp(44px,8vw,60px)] md:text-[clamp(44px,min(6.5vw,7.2vh),76px)]"
           >
             <span className="sr-only">
               Albania, planned by people who live here.
@@ -287,7 +287,7 @@ export default function Hero({
           >
             <a
               href={exploreHref}
-              className="group flex items-center gap-2 rounded-full bg-[#141414] px-6 py-3.5 font-semibold text-white transition hover:bg-[#D93A2B]"
+              className="group flex flex-1 items-center justify-center gap-2 rounded-full bg-[#141414] px-6 py-3.5 font-semibold text-white transition hover:bg-[#D93A2B] sm:flex-none"
             >
               Explore tours
               <svg
@@ -307,13 +307,13 @@ export default function Hero({
             </a>
             <a
               href={enquireHref}
-              className="rounded-full border border-black/10 px-6 py-3.5 font-semibold backdrop-blur transition hover:border-[#141414] hover:bg-black/5"
+              className="flex-1 rounded-full border border-black/10 px-6 py-3.5 text-center font-semibold backdrop-blur transition hover:border-[#141414] hover:bg-black/5 sm:flex-none"
             >
               Enquire
             </a>
             <a
               href="/about"
-              className="flex items-center gap-2.5 rounded-full py-1 pl-1 pr-3 text-[13px] text-[#141414]/85 underline-offset-4 transition hover:text-[#141414] hover:underline"
+              className="flex w-full items-center gap-2.5 rounded-full py-1 pl-1 pr-3 text-[13px] text-[#141414]/85 underline-offset-4 transition hover:text-[#141414] hover:underline sm:w-auto"
             >
               <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-[#ECE7DC] text-sm font-bold text-[#141414]">
                 {badFounder ? (
@@ -332,7 +332,7 @@ export default function Hero({
           </div>
           <ul
             style={after(1100)}
-            className={`mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#141414]/75 ${fade}`}
+            className={`mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-[13px] text-[#141414]/75 sm:flex sm:flex-wrap sm:gap-x-5 sm:text-sm ${fade}`}
           >
             {FACTS.map((f) => (
               <li key={f} className="flex items-center gap-1.5">
@@ -344,10 +344,10 @@ export default function Hero({
         </div>
       </div>
 
-      {/* scroll cue */}
+      {/* scroll cue (hidden on phones) */}
       <a
         href={mapHref}
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[.2em] text-[#141414]/70 hover:text-[#141414] md:left-8 md:translate-x-0"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs uppercase tracking-[.2em] text-[#141414]/70 hover:text-[#141414] md:left-8 md:flex md:translate-x-0"
       >
         Scroll to explore the map
         <span
